@@ -1,0 +1,9 @@
+@(students: Array[models.Student])
+<title>All Student</title>
+</head>
+<body>
+	<h1>Student List</h1>
+	@for(student <- students) {
+		<p>@student.getId() - @student.getName()</p>
+	}
+</body>
