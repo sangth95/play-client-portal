@@ -1,9 +1,33 @@
 @(students: Array[models.Student])
-<title>All Student</title>
+<head>
+	<title>All Student</title>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
 </head>
 <body>
-	<h1>Student List</h1>
-	@for(student <- students) {
-		<p>@student.getId() - @student.getName()</p>
-	}
+	<div class="panel panel-primary">
+		<div class="panel panel-heading">Student List</div>
+
+		<div class="panel panel-body">
+			List of all students
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			@for(student <- students) {
+				<tr>
+					<td>@student.getId()</td>
+					<td>@student.getName().toString()</td>
+				</tr>
+			}
+			</tbody>
+		</table>
+	</div>
+
+
 </body>

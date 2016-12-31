@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Course;
 import models.Student;
 import play.libs.ws.*;
 import play.libs.ws.WSRequest;
@@ -51,4 +52,51 @@ public class HomeController extends Controller {
     			);
     }
 
+
+    //get all course
+	public CompletionStage<Result> getCourseList() {
+    	String url = "http://localhost:3000/courses";
+
+    	WSRequest request = ws.url(url);
+
+    	return (CompletionStage<Result>) request.get().thenApply(wsResponse ->
+				ok(
+						courseForm.render(Course.parseToCourseList(wsResponse.asJson()))
+				)
+		);
+	}
+
+	//get Course by Id
+	public CompletionStage<Result> getCourseById(Integer id) {
+    	String url = "http://localhost:3000/courses/" + id;
+
+    	WSRequest wsRequest = ws.url(url);
+
+    	return wsRequest.get().thenApply(wsResponse ->
+			ok(wsResponse.asJson().get("response").toString())
+		);
+	}
+
+	public CompletionStage<Result> getAllStudentsOfCourseById(Integer id) {
+		String url = "http://localhost:3000/courses/all/" + id;
+		WSRequest wsRequest = ws.url(url);
+		return wsRequest.get().thenApply(wsResponse ->
+			ok(studentForm.render(Student.parseToStudentsList(wsResponse.asJson())))
+		);
+	}
+
+
+	//create course
+	public Result createCourse() {
+    	return ok(createCourseForm.render());
+	}
+
+	public CompletionStage<Result> createCourseResult(String name) {
+    	String url = "http://localhost:3000/courses";
+    	WSRequest wsRequest = ws.url(url);
+    	wsRequest.setQueryParameter("name", name);
+    	return wsRequest.post("content").thenApply(wsResponse ->
+				ok(wsRequest.toString())
+		);
+	}
 }

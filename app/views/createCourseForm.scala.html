@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Course</title>
+  <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+</head>
+<body>
+  <form class="col-lg-6" method="post" action="http://localhost:3000/courses">
+    <h1>Add Course</h1>
+    <div class="form-group form-inline">
+      <label class="col-lg-2">Id: </label>
+      <input class="form-control col-lg-10" type="text" id="id" name="id"/>
+    </div>
+    <br><br>
+    <div class="form-group form-inline">
+      <label class="col-lg-2">Name: </label>
+      <input class="form-control col-lg-10" type="text" id="name" name="name"/>
+    </div>
+    <br><br>
+    <input class="form-control btn-success" type="submit" id="submit" value="Add">
+  </form>
+</body>
+</html>
